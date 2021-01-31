@@ -29,7 +29,9 @@ const rollback = async (
 };
 
 const testConnection = async (counter: number): Promise<void> => {
-  counter = counter ? counter + 1 : 1;
+  counter == 0
+    ? await Promise.reject('Failed to connect. Max attempts reached.')
+    : null;
 
   Logger.info(
     `Iniciado teste de conexão com banco de dados! Tentativa : ${counter} ...`,
@@ -46,7 +48,7 @@ const testConnection = async (counter: number): Promise<void> => {
       'Erro ao tentar executar query de teste [SELECT NOW()]  [Nova tentativa em 10 segundo]',
     );
     setTimeout(async () => {
-      await testConnection(counter);
+      await testConnection(counter--);
     }, 10000);
     return;
   }
