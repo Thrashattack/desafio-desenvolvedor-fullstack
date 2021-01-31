@@ -10,8 +10,13 @@ export default class UserRepository extends Repository {
   }
 
   async findById(id: number): Promise<UserInstance> {
-    const transaction = new Transaction(this.db.sequelize, { autocommit: true })
-    const user = await this.UserRepository.findOne({ where: { id }, transaction });
+    const transaction = new Transaction(this.db.sequelize, {
+      autocommit: true,
+    });
+    const user = await this.UserRepository.findOne({
+      where: { id },
+      transaction,
+    });
     if (!user) {
       await transaction.rollback();
       return Promise.reject(user);
@@ -20,18 +25,25 @@ export default class UserRepository extends Repository {
   }
 
   async findByLogin(login: string): Promise<UserInstance> {
-    const transaction = new Transaction(this.db.sequelize, { autocommit: true })
-    const user = await this.UserRepository.findOne({ where: { email: login }, transaction });
+    const transaction = new Transaction(this.db.sequelize, {
+      autocommit: true,
+    });
+    const user = await this.UserRepository.findOne({
+      where: { email: login },
+      transaction,
+    });
     if (!user) {
       await transaction.rollback();
       return Promise.reject(user);
     }
-    
+
     return Promise.resolve(user);
   }
 
   async save(user: UserInstance): Promise<UserInstance> {
-    const transaction = new Transaction(this.db.sequelize, { autocommit: true })
+    const transaction = new Transaction(this.db.sequelize, {
+      autocommit: true,
+    });
     const createUser = await this.UserRepository.create(user, { transaction });
     if (!createUser) {
       await transaction.rollback();

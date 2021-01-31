@@ -1,6 +1,8 @@
-import { rules } from '@modules/auth/infra/http/validators';
 import { Router } from 'express';
+
+import { rules } from '@modules/auth/infra/http/validators';
 import AuthController from '@modules/auth/infra/http/controllers';
+
 import ensureAuthenticated from '@shared/infra/http/middlewares/ensureAuthentication';
 import validationsInterceptor from '@shared/infra/http/middlewares/validateRequest';
 
