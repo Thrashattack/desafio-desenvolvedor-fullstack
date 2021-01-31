@@ -10,7 +10,8 @@ import v1Routes from '@shared/infra/http/api/v1';
 
 import '@config/rentability';
 
-// import Connection from '@shared/infra/postgres/Connection';
+import Connection from '@shared/infra/postgres/Connection';
+import logger from '@shared/singletons/Logger';
 
 const app = express();
 
@@ -25,14 +26,16 @@ app.use(
   v1Routes,
 );
 
-/* Connection.testConnection(5)
+Connection.testConnection(5)
   .then(() => {
     app.set('connectionPool', Connection.createPool());
 
     app.set('doRollback', Connection.rollback);
+
+    logger.info("Database connection is ready.");
   })
   .catch(e => {
-    throw new Error(JSON.stringify(e));
-  }); */
+    logger.error(e);
+  });
 
 export default app;

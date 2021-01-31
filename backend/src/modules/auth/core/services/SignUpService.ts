@@ -25,6 +25,7 @@ export default class SignUpService
     newUser.password = this.PasswordProvider.provide(
       newUser.password,
     ) as string;
+    newUser.login = newUser.email;
 
     const user = await this.UserRepository.save(newUser);
 
