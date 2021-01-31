@@ -8,7 +8,9 @@ import cors from 'cors';
 
 import v1Routes from '@shared/infra/http/api/v1';
 
-import Connection from '@shared/infra/postgres/Connection';
+import '@config/rentability';
+
+// import Connection from '@shared/infra/postgres/Connection';
 
 const app = express();
 
@@ -23,7 +25,7 @@ app.use(
   v1Routes,
 );
 
-Connection.testConnection(5)
+/* Connection.testConnection(5)
   .then(() => {
     app.set('connectionPool', Connection.createPool());
 
@@ -31,6 +33,6 @@ Connection.testConnection(5)
   })
   .catch(e => {
     throw new Error(JSON.stringify(e));
-  });
+  }); */
 
 export default app;

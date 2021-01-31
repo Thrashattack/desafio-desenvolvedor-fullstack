@@ -11,6 +11,3 @@ export const rules = {
   ],
   verify: () => [param('login', 'is required').exists()],
 };
-
-export const interceptor = (req: unknown, res: unknown, next: () => unknown) =>
-  next();
