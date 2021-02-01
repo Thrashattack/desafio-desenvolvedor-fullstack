@@ -56,7 +56,7 @@ services:
       - api
     container_name: front
     ports:
-      - 80:3000
+      - 80:5000
     restart: unless-stoped
 
 networks:
