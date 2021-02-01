@@ -16,6 +16,19 @@ services:
     networks:
       - db
     restart: unless-stopped
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: imdb-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "you@email.here"
+      PGADMIN_DEFAULT_PASSWORD: "yourpassword"
+    ports:
+      - "16543:80"
+    depends_on:
+      - database
+    networks:
+      - imdb-network
 
   api:
     build: 
