@@ -1,5 +1,6 @@
 import { validationResult } from 'express-validator';
 import { NextFunction, Request, Response } from 'express';
+import { ValidationRules } from '@common-types/Validations';
 
 export default (
   req: Request,
@@ -12,8 +13,8 @@ export default (
     const instructions: string[] = [];
 
     errors.array().forEach(item => {
-      if (item.msg === 'required') {
-        instructions.push(`Missing required field: ${item.param}`);
+      if (item.msg in ValidationRules) {
+        instructions.push(`${ValidationRules[item.msg]} field: ${item.param}`);
       }
     });
 
