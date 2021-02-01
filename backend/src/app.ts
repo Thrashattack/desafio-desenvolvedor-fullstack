@@ -32,7 +32,7 @@ Connection.testConnection(5)
 
     app.set('doRollback', Connection.rollback);
 
-    logger.info("Database connection is ready.");
+    logger.info('Database connection is ready.');
   })
   .catch(e => {
     logger.error(e);

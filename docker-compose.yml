@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   db:
-    container_name: postgres_database
+    container_name: db
     image: postgres:latest
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
@@ -41,7 +41,7 @@ services:
   #      - .:/home/node/public
   #  networks:
   #    - api
-  #  container_name: frontend
+  #  container_name: front
   #  ports:
   #    - 80:80
   #  restart: unless-stoped

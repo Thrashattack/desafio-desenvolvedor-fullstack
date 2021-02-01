@@ -10,53 +10,53 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       userId: {
         type: Sequelize.INTEGER,
         references: {
           model: {
             tableName: 'Users',
-            schema: 'public'
+            schema: 'public',
           },
-          key: 'id'
+          key: 'id',
         },
       },
       months: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       initialAmount: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
       },
       cdbRentability: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
       },
       savingsRentability: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
       },
       cdiOverCdb: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
       },
       cdbFinalAmount: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
       },
       savingsFinalAmount: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
       },
       simulationDate: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Simulations');
-  }
+  },
 };
