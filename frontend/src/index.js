@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+
+import reportWebVitals from './reportWebVitals';
+
 import Home from './views/home/Home';
 import History from './views/simulations-history/History';
 import NotFound from './views/errors/NotFound';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 ReactDOM.render(
     <BrowserRouter>

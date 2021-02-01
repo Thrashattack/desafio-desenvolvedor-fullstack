@@ -19,16 +19,16 @@ services:
   
   pgadmin:
     image: dpage/pgadmin4
-    container_name: imdb-pgadmin
+    container_name: pgadmin
     environment:
-      PGADMIN_DEFAULT_EMAIL: "you@email.here"
-      PGADMIN_DEFAULT_PASSWORD: "yourpassword"
+      PGADMIN_DEFAULT_EMAIL: "teste@teste.com"
+      PGADMIN_DEFAULT_PASSWORD: "teste"
     ports:
       - "16543:80"
     depends_on:
       - database
     networks:
-      - imdb-network
+      - db
 
   api:
     build: 
@@ -46,18 +46,18 @@ services:
       - 8080:8080
     restart: unless-stopped
 
-  #frontend:
-  #  build: 
-  #    context: ./frontend
-  #    dockerfile: Dockerfile
-  #  volumes:
-  #      - .:/home/node/public
-  #  networks:
-  #    - api
-  #  container_name: front
-  #  ports:
-  #    - 80:80
-  #  restart: unless-stoped
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+        - .:/home/node/public
+    networks:
+      - api
+    container_name: front
+    ports:
+      - 80:3000
+    restart: unless-stoped
 
 networks:
   db:
