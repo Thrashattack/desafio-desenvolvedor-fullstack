@@ -1,10 +1,30 @@
 version: '3.6'
 
 services:
-  api:
-    build: ./backend
+  db:
+    container_name: db
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-teste}
+      POSTGRES_DB: ${POSTGRES_DB:-investiment_calculator}
+      PGDATA: /data/postgres
     volumes:
-      - .:/home/node/api   
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - db
+    restart: unless-stopped
+
+  api:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/home/node/api   
     networks:
       - api
       - db
@@ -13,37 +33,23 @@ services:
       - 8080:8080
     restart: unless-stopped
 
-  db:
-    container_name: postgres_database
-      image: postgres
-      environment:
-        POSTGRES_USER: ${POSTGRES_USER:-postgres}
-        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-teste}
-        POSTGRES_DB: ${POSTGRES_DB:-investiment_calculator}
-        PGDATA: /data/postgres
-      volumes:
-        - postgres:/data/postgres
-      ports:
-        - "5432:5432"
-      networks:
-        - db
-      restart: unless-stopped
-
-  frontend:
-    build: ./frontend
-    volumes:
-        - .:/home/node/public
-    networks:
-      - api
-    container_name: frontend
-    ports:
-      - 80:80
-    restart: unless-stoped
+  #frontend:
+  #  build: 
+  #    context: ./frontend
+  #    dockerfile: Dockerfile
+  #  volumes:
+  #      - .:/home/node/public
+  #  networks:
+  #    - api
+  #  container_name: front
+  #  ports:
+  #    - 80:80
+  #  restart: unless-stoped
 
 networks:
-  api:
-    driver: bridge
   db:
+    driver: bridge
+  api:
     driver: bridge
 
 volumes:

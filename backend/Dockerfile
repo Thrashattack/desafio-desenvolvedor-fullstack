@@ -33,4 +33,6 @@ COPY --chown=node:node --from=builder /home/node/build/dist .
 
 EXPOSE 8080
 
+CMD ["npx", "sequelize-cli", "db:migrate"]
+
 CMD ["pm2-runtime", "process.yml"]
