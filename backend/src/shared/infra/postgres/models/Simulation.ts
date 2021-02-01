@@ -23,7 +23,6 @@ export interface SimulationAttributes {
   savingsFinalAmount: number;
   simulationDate: string;
   user?: UserAttributes;
-  password?: string
 }
 
 export interface SimulationInstance

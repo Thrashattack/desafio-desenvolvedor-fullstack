@@ -1,22 +1,6 @@
 version: '3.6'
 
 services:
-  api:
-    build: 
-      context: ./backend
-      dockerfile: Dockerfile
-    depends_on:
-      - db
-    volumes:
-      - ./backend:/home/node/api   
-    networks:
-      - api
-      - db
-    container_name: api
-    ports:
-      - 8080:8080
-    restart: unless-stopped
-
   db:
     container_name: postgres_database
     image: postgres:latest
@@ -33,6 +17,22 @@ services:
       - db
     restart: unless-stopped
 
+  api:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/home/node/api   
+    networks:
+      - api
+      - db
+    container_name: api
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+
   #frontend:
   #  build: 
   #    context: ./frontend
@@ -47,9 +47,9 @@ services:
   #  restart: unless-stoped
 
 networks:
-  api:
-    driver: bridge
   db:
+    driver: bridge
+  api:
     driver: bridge
 
 volumes:
