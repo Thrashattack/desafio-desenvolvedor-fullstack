@@ -1,6 +1,6 @@
 module.exports = {
   'env': 'development',
-  'config': './sequelizeConfig.js',
+  'config': './.sequelize.js',
   'models-path': './src/shared/infra/postgres/models',
   'migrations-path': './src/shared/infra/postgres/migrations'
 };
