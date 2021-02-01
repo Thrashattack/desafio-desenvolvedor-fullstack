@@ -1,13 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Home from './views/home/Home';
+import History from './views/simulations-history/History';
+import NotFound from './views/errors/NotFound';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <BrowserRouter>
+      <Switch>
+        <Route path='/' exact={true} component={Home}/>
+        <Route path='/simulations' exact={true} component={History}/>
+        <Route path='*' component={NotFound} />
+      </Switch>
+    </ BrowserRouter>,
   document.getElementById('root')
 );
 
@@ -15,3 +22,4 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
